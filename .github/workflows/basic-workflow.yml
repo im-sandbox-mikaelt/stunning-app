@@ -35,6 +35,11 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
+  deployment:
+    runs-on: windows-latest
+    needs: [build]
+    environment: DEV
+    steps:
       - name: Run only if a PR is opened
         if: ${{ github.event_name == 'pull_request' }}
         run: echo Hello, from the PR!!!
