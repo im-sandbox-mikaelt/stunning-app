@@ -38,8 +38,19 @@ jobs:
   deployment:
     runs-on: windows-latest
     needs: [build]
-    environment: DEV
     steps:
       - name: Run only if a PR is opened
         if: ${{ github.event_name == 'pull_request' }}
         run: echo Hello, from the PR!!!
+
+      - uses: actions/checkout@v4
+        with:
+          repository: im-sandbox-mikaelt/hello-app1-composite-action
+          path: ./.github/actions/hello-app1-composite-action
+      
+      - id: foo
+        uses: ./.github/actions/hello-app1-composite-action
+        with:
+          who-to-greet: 'Mona the Octocat with Team1'
+          
+      - run: echo "random number" ${{ steps.foo.outputs.random-number }}
