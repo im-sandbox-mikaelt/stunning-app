@@ -47,6 +47,7 @@ jobs:
         with:
           repository: im-sandbox-mikaelt/hello-app1-composite-action
           path: ./.github/actions/hello-app1-composite-action
+          token: ${{ secrets.GH_NEW_TOKEN }}
       
       - id: foo
         uses: ./.github/actions/hello-app1-composite-action
